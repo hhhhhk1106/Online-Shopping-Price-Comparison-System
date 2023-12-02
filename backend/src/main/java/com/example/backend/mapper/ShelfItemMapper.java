@@ -6,8 +6,11 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.example.backend.entity.ShelfItem;
 import org.apache.ibatis.annotations.Mapper;
 
+import java.util.List;
+
 @Mapper
 public interface ShelfItemMapper extends BaseMapper<ShelfItem> {
     IPage<ShelfItem> selectShelfItemPage(Page<ShelfItem> page);
-
+    List<ShelfItem> selectShelfItemPageByKeyword(String keyword);
+    List<ShelfItem> selectShelfItemPageByMerchantID(Integer merchant_id);
 }
