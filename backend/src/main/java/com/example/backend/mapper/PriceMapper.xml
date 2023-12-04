@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.backend.mapper.PriceMapper">
+    <select id="selectPricePage" resultType="Price">
+        select * from `price`
+    </select>
+    <select id="selectPricePageByID" resultType="Price">
+        select * from `price`
+        <where>
+            id=#{id}
+        </where>
+    </select>
+    <sql id="orderByClause">
+        <if test="orderBy != null">
+            ORDER BY ${orderBy}
+        </if>
+    </sql>
+    <select id="selectPricePageByShelfItemID" resultType="Price">
+        select * from `price`
+        <where>
+            shelfItem_id=#{shelfItem_id}
+        </where>
+        <include refid="orderByClause">
+            <property name="orderBy" value="timestamp ASC"/>
+        </include>
+    </select>
+</mapper>
