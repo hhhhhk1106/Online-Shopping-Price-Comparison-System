@@ -13,4 +13,5 @@ public interface ShelfItemMapper extends BaseMapper<ShelfItem> {
     IPage<ShelfItem> selectShelfItemPage(Page<ShelfItem> page);
     List<ShelfItem> selectShelfItemPageByKeyword(String keyword);
     List<ShelfItem> selectShelfItemPageByMerchantID(Integer merchant_id);
+    List<Object> selectShelfItemInfoByKeyword(String keyword);
 }

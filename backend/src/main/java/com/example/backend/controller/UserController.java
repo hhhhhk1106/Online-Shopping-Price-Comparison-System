@@ -15,7 +15,7 @@ public class UserController {
 
     @RequestMapping("/api/user_info_by_id")
     @CrossOrigin
-    public User updateAddress(@RequestParam(value = "id")Integer id) {
+    public User getUserInfoByID(@RequestParam(value = "id")Integer id) {
         return userService.searchByID(id);
     }
 }

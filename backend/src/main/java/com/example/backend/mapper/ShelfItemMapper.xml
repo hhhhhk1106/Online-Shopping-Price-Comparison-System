@@ -18,4 +18,37 @@
             merchant_id = #{merchant_id}
         </where>
     </select>
+
+    <resultMap id="ShelfItemResultMap" type="ShelfItem">
+        <id property="id" column="id"/>
+        <result property="item_id" column="item_id"/>
+        <result property="merchant_id" column="merchant_id"/>
+        <result property="platform_id" column="platform_id"/>
+        <result property="name" column="name"/>
+        <result property="description" column="description"/>
+        <result property="origin" column="origin"/>
+        <result property="production_date" column="production_date"/>
+        <association property="platform" column="platform_id" javaType="Platform">
+            <id property="id" column="id"/>
+            <result property="name" column="platform_name"/>
+        </association>
+        <association property="merchant" column="merchant_id" javaType="Merchant">
+            <id property="id" column="id"/>
+            <result property="name" column="merchant_name"/>
+        </association>
+    </resultMap>
+    <select id="selectShelfItemInfoByKeyword" resultMap="ShelfItemResultMap">
+        SELECT
+        shelf_item.*,
+        platform.name AS platform_name,
+        merchant.name AS merchant_name
+        FROM `shelf-item` AS shelf_item
+        LEFT JOIN platform ON shelf_item.platform_id = platform.id
+        LEFT JOIN merchant ON shelf_item.merchant_id = merchant.id
+        <where>
+            <if test="keyword != null and keyword != ''">
+                AND shelf_item.`name` LIKE CONCAT('%', #{keyword}, '%')
+            </if>
+        </where>
+    </select>
 </mapper>

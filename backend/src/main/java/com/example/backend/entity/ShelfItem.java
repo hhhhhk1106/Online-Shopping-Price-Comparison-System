@@ -19,6 +19,9 @@ public class ShelfItem {
     private String origin;  // 产地
     private Date production_date;
 
+    private Platform platform;
+    private Merchant merchant;
+
     public ShelfItem(Integer item_id, Integer merchant_id, Integer platform_id, String name, String description, String origin, Date production_date) {
         this.item_id = item_id;
         this.merchant_id = merchant_id;
@@ -28,6 +31,8 @@ public class ShelfItem {
         this.origin = origin;
         this.production_date = production_date;
     }
+
+
     public ShelfItem() {}
 
     public void setItem_id(Integer item_id) {
