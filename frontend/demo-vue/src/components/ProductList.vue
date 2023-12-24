@@ -11,7 +11,7 @@
           <p>产地: {{ product.origin }}</p>
           <p>生产日期: {{ formatDate(product.production_date) }}</p>
           <p>商家: {{ product.merchant.name }}</p>
-          <p>平台: {{ product.platform ? product.platform.name : 'N/A' }}</p>
+          <p>平台: {{ product.platform ? product.platform.name : '无' }}</p>
         </div>
         </li>
       </ul>
