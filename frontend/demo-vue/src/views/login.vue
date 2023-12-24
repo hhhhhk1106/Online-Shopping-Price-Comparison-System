@@ -71,9 +71,19 @@ export default {
         .then(successResponse => {
           this.userInfo = successResponse.data;
           console.log(this.userInfo)
-          // if (successResponse.data.code === 200) {
-            // this.$router.replace({path: '/'})
-          // }
+
+          if(!this.userInfo) {
+            this.userLoginError = '用户不存在';
+            return;
+          } else {
+            // 跳转
+            // console.log('a')
+            localStorage.setItem("role", 'user');
+            localStorage.setItem("id", this.userInfo.id);
+            this.$router.replace({path: '/user_info'})
+            // this.$router.push({name:'UserInfo',params: {id:this.userInfo.id}})
+            // this.$router.replace({ path: '/', params: { id: userId } });
+          }
         })
         .catch(failResponse => {
         })

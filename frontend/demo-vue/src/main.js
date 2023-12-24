@@ -8,10 +8,12 @@ import 'element-ui/lib/theme-chalk/index.css'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
 
+import UserStatus from './components/UserStatus';
 
 Vue.config.productionTip = false
 Vue.use(ElementUI)
 Vue.use(VueAxios,axios)
+Vue.component('UserStatus', UserStatus);
 
 //var axios = require('axios')
 // 全局注册，之后可在其他组件中通过 this.$axios 发送数据
