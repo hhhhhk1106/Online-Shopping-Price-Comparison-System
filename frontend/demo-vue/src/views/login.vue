@@ -80,7 +80,8 @@ export default {
             // console.log('a')
             localStorage.setItem("role", 'user');
             localStorage.setItem("id", this.userInfo.id);
-            this.$router.replace({path: '/user_info'})
+            // this.$router.replace({path: '/user_info'})
+            this.$router.replace({path: '/'})
             // this.$router.push({name:'UserInfo',params: {id:this.userInfo.id}})
             // this.$router.replace({ path: '/', params: { id: userId } });
           }

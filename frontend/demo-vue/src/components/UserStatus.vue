@@ -1,13 +1,21 @@
 <!-- UserStatus.vue -->
 
 <template>
-    <div class="user-status">
+  <div class="user-status">
+    <div class="links">
+      <router-link to="/">主页</router-link>
+      <router-link v-if="isLoggedIn" to="/user_info">个人信息</router-link>
+    </div>
+    
+    <div class="user-info">
       <span v-if="isLoggedIn">已登录:{{ logInfo }}</span>
       <span v-else>未登录</span>
       <button v-if="isLoggedIn" @click="logout">登出</button>
       <button v-else @click="login">登录</button>
+      <!-- <button v-if="isLoggedIn" @click="showInfo">个人信息</button> -->
     </div>
-  </template>
+  </div>
+</template>
   
   <script>
   export default {
@@ -46,12 +54,22 @@
         localStorage.removeItem('role');
         localStorage.removeItem('id');
   
-        // 跳转到登录页面
-        this.$router.push('/login');//TODO: 主页
+        // 跳转到主页
+        // this.$router.replace('/');
+        if (this.$route.path !== '/') {
+          // 如果不是当前路由，则触发导航
+          this.$router.push('/');
+        } else {
+          // 刷新
+          this.$router.go(0);
+        }
       },
       login() {
         this.$router.push('/login');
-      }
+      },
+      // showInfo() {
+      //   this.$router.push('/user_info');
+      // },
     }
   };
   </script>
@@ -59,10 +77,11 @@
 <style scoped>
 .user-status {
   display: flex;
+  justify-content: space-between;
   align-items: center;
-  justify-content: flex-end; /* 将内容居右 */
 }
-.user-status span {
-  margin-right: 10px; /* 为已登录文字添加右边距 */
+
+.links {
+  order: -1; /* 将 links 放到最左边 */
 }
 </style>
