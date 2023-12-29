@@ -1,12 +1,10 @@
 package com.example.backend.controller;
 
+import com.example.backend.Result;
 import com.example.backend.entity.User;
 import com.example.backend.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class UserController {
@@ -17,5 +15,11 @@ public class UserController {
     @CrossOrigin
     public User getUserInfoByID(@RequestParam(value = "id")Integer id) {
         return userService.searchByID(id);
+    }
+
+    @RequestMapping("/api/user_register")
+    @CrossOrigin
+    public Result addUser(@RequestBody User user){
+        return userService.addUser(user);
     }
 }

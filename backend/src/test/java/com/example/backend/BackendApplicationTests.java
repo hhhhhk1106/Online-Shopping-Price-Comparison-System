@@ -34,6 +34,7 @@ class BackendApplicationTests {
         User user = new User("a",18,"m","12345");
         Integer i = userMapper.insert(user);
         System.out.println(i);
+        System.out.println(user.getId());
     }
 
     @Test

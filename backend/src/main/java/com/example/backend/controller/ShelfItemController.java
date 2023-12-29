@@ -16,4 +16,10 @@ public class ShelfItemController {
     public List<Object> getShelfItemsByKeyword(@RequestParam(value = "keyword") String keyword) {
         return shelfItemService.searchByKeyword(keyword);
     }
+
+    @RequestMapping("/api/shelf_item_info_by_id")
+    @CrossOrigin
+    public List<Object> getShelfItemsByID(@RequestParam(value = "id") Integer id) {
+        return shelfItemService.searchByID(id);
+    }
 }

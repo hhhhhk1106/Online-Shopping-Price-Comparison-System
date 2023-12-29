@@ -51,4 +51,17 @@
             </if>
         </where>
     </select>
+
+    <select id="selectShelfItemInfoByID" resultMap="ShelfItemResultMap">
+        SELECT
+        shelf_item.*,
+        platform.name AS platform_name,
+        merchant.name AS merchant_name
+        FROM `shelf-item` AS shelf_item
+        LEFT JOIN platform ON shelf_item.platform_id = platform.id
+        LEFT JOIN merchant ON shelf_item.merchant_id = merchant.id
+        <where>
+            shelf_item.id = #{id}
+        </where>
+    </select>
 </mapper>

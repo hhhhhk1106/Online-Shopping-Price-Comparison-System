@@ -14,4 +14,9 @@ public class ShelfItemServiceImpl implements ShelfItemService{
     public List<Object> searchByKeyword(String keyword) {
         return shelfItemMapper.selectShelfItemInfoByKeyword(keyword);
     }
+
+    @Override
+    public List<Object> searchByID(Integer id) {
+        return shelfItemMapper.selectShelfItemInfoByID(id);
+    }
 }
