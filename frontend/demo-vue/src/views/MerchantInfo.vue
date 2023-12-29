@@ -1,16 +1,13 @@
-<!-- UserInfo.vue -->
+<!-- MerchantInfo.vue -->
 
 <template>
     <div>
       <UserStatus></UserStatus>
-      <h2>User Information</h2>
-      <div v-if="userInfo">
-        <p>ID: {{ userInfo.id }}</p>
-        <p>Name: {{ userInfo.name }}</p>
-        <p>Age: {{ userInfo.age }}</p>
-        <p>Sex: {{ userInfo.sex }}</p>
-        <p>Phone: {{ userInfo.phone }}</p>
-        <!-- 显示其他用户信息... -->
+      <h2>Merchant Information</h2>
+      <div v-if="merchantInfo">
+        <p>ID: {{ merchantInfo.id }}</p>
+        <p>Name: {{ merchantInfo.name }}</p>
+        <p>Address: {{ merchantInfo.address }}</p>
       </div>
       <p v-if="userLoginError" style="color: red;">{{ userLoginError }}</p>
     </div>
@@ -20,13 +17,13 @@
 import UserStatus from '@/components/UserStatus.vue';
 
 export default {
-    name: 'UserInfo',
+    name: 'MerchantInfo',
     components: {
         UserStatus
     },
     data() {
       return {
-        userInfo: null,
+        merchantInfo: null,
         userLoginError: ''
       };
     },
@@ -40,26 +37,24 @@ export default {
     },
     methods: {
         checkLoginStatus() {
-        // 检查 localStorage 中是否存在相关数据
             const role = localStorage.getItem('role');
             const userId = localStorage.getItem('id');
             // 如果 token 和 userId 都存在，则返回 true
             return !!role && !!userId;
         },
         fetchUserInfo() {
-            // 假设你从路由参数中获取到用户ID
             const userId = localStorage.getItem('id');
     
             this.$axios
             ({
                 method: "post",
-                url:'/user_info_by_id', 
+                url:'/merchant_info_by_id', 
                 params:{ id: userId }
             })
             .then(successResponse => {
-                this.userInfo = successResponse.data;
+                this.merchantInfo = successResponse.data;
     
-                if (!this.userInfo) {
+                if (!this.merchantInfo) {
                 this.userLoginError = '用户不存在';
                 }
             })

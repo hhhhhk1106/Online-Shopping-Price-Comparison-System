@@ -4,7 +4,8 @@
   <div class="user-status">
     <div class="links">
       <router-link to="/">主页</router-link>
-      <router-link v-if="isLoggedIn" to="/user_info">个人信息</router-link>
+      <router-link v-if="role_user" to="/user_info">个人信息</router-link>
+      <router-link v-if="role_merchant" to="/merchant_info">商家信息</router-link>
     </div>
     
     <div class="user-info">
@@ -23,7 +24,9 @@
     data() {
       return {
         isLoggedIn: false,
-        logInfo: null
+        logInfo: null,
+        role_user: false,
+        role_merchant: false,
       };
     },
     created() {
@@ -37,6 +40,8 @@
         const userId = localStorage.getItem('id');
 
         if(role == 'user') {
+          this.role_user = true;
+          this.role_merchant = false;
           if(userId == 1) {
             this.logInfo = '管理员';
           } else {
@@ -44,6 +49,8 @@
           }
         } else if(role == 'merchant') {
           this.logInfo = '商家 id:'+userId;
+          this.role_user = false;
+          this.role_merchant = true;
         }
   
         // 如果 token 和 userId 都存在，则返回 true

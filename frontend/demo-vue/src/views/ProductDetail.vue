@@ -2,6 +2,7 @@
 
 <template>
     <div>
+      <UserStatus></UserStatus>
         <h2>商品详情页</h2>
         <p>商品名称: {{ product.name }}</p>
         <p>商品ID: {{ productId }}</p>
@@ -22,7 +23,12 @@
   </template>
   
   <script>
+import UserStatus from '@/components/UserStatus.vue';
+
   export default {
+    components: {
+        UserStatus
+    },
     data() {
       return {
         productId: null,

@@ -77,13 +77,9 @@ export default {
             return;
           } else {
             // 跳转
-            // console.log('a')
             localStorage.setItem("role", 'user');
             localStorage.setItem("id", this.userInfo.id);
-            // this.$router.replace({path: '/user_info'})
             this.$router.replace({path: '/'})
-            // this.$router.push({name:'UserInfo',params: {id:this.userInfo.id}})
-            // this.$router.replace({ path: '/', params: { id: userId } });
           }
         })
         .catch(failResponse => {
@@ -92,6 +88,7 @@ export default {
     },
     registerUser() {
       // 实现用户注册逻辑
+      this.$router.replace({path: '/user_register'})
       console.log('注册新用户点击');
     },
     merchantLogin() {
@@ -107,10 +104,34 @@ export default {
           return;
       }
       console.log('商家登录点击，id：', enteredLoginID);
-      // console.log('商家登录点击');
+      let Param={
+        id:enteredLoginID
+      }
+      this.$axios
+        ({
+          method: "post",
+          url:'/merchant_info_by_id', 
+          params:Param
+        })
+        .then(successResponse => {
+          this.userInfo = successResponse.data;
+          console.log(this.userInfo)
+
+          if(!this.userInfo) {
+            this.userLoginError = '用户不存在';
+            return;
+          } else {
+            localStorage.setItem("role", 'merchant');
+            localStorage.setItem("id", this.userInfo.id);
+            this.$router.replace({path: '/'})
+          }
+        })
+        .catch(failResponse => {
+        })
     },
     registerMerchant() {
       // 实现商家注册逻辑
+      this.$router.replace({path: '/merchant_register'})
       console.log('注册新商家点击');
     }
   }

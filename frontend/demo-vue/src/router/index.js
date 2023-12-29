@@ -4,6 +4,9 @@ import HelloWorld from '@/components/HelloWorld'
 
 import login from '@/views/login.vue'
 import UserInfo from '@/views/UserInfo.vue'
+import MerchantInfo from '@/views/MerchantInfo.vue'
+import UserRegister from '@/views/UserRegister.vue'
+import MerchantRegister from '@/views/MerchantRegister.vue'
 import Home from '@/views/Home.vue';
 import ProductDetail from '@/views/ProductDetail.vue';
 
@@ -30,6 +33,21 @@ export default new Router({
       path: '/user_info',
       name: 'UserInfo',
       component: UserInfo
+    },
+    {
+      path: '/merchant_info',
+      name: 'MerchantInfo',
+      component: MerchantInfo
+    },
+    {
+      path: '/user_register',
+      name: 'UserRegister',
+      component: UserRegister
+    },
+    {
+      path: '/merchant_register',
+      name: 'MerchantRegister',
+      component: MerchantRegister
     },
     {
       path: '/product/:id',
