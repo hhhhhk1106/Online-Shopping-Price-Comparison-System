@@ -10,21 +10,27 @@
         <p>Address: {{ merchantInfo.address }}</p>
       </div>
       <p v-if="userLoginError" style="color: red;">{{ userLoginError }}</p>
+      <!-- <h2>拥有的商品列表：</h2> -->
+      <ProductList :products="productList" @productClick="goToProductDetail" />
+
     </div>
   </template>
   
 <script>
 import UserStatus from '@/components/UserStatus.vue';
+import ProductList from '@/components/ProductList.vue';
 
 export default {
     name: 'MerchantInfo',
     components: {
-        UserStatus
+        UserStatus,
+        ProductList
     },
     data() {
       return {
         merchantInfo: null,
-        userLoginError: ''
+        userLoginError: '',
+        productList: [],
       };
     },
     created() {
@@ -33,6 +39,7 @@ export default {
         // 如果已登录，获取用户信息
         if (this.isLoggedIn) {
             this.fetchUserInfo();
+            this.fetchShelfItems();
         }
     },
     methods: {
@@ -62,6 +69,25 @@ export default {
                 console.error('获取用户信息失败', error);
                 this.userLoginError = '获取用户信息失败';
             });
+        },
+        fetchShelfItems() {
+          const userId = localStorage.getItem('id');
+          this.$axios
+          ({
+            method: "post",
+            url:'/shelf_item_info_by_merchant_id', 
+            params:{id:userId}
+          })
+          .then(response => {
+            this.productList = response.data;
+            console.log(response.data)
+          })
+          .catch(error => {
+            console.error('Error fetching shelf items:', error);
+          });
+        },
+        goToProductDetail(productId) {
+          this.$router.push({ name: 'productDetail', params: { id: productId } });
         }
     }
 };

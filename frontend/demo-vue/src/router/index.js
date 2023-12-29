@@ -9,6 +9,7 @@ import UserRegister from '@/views/UserRegister.vue'
 import MerchantRegister from '@/views/MerchantRegister.vue'
 import Home from '@/views/Home.vue';
 import ProductDetail from '@/views/ProductDetail.vue';
+import ShelfItemRegister from '@/views/ShelfItemRegister.vue'
 
 Vue.use(Router)
 
@@ -53,6 +54,11 @@ export default new Router({
       path: '/product/:id',
       name: 'productDetail',
       component: ProductDetail
+    },
+    {
+      path: '/shelf_item_register',
+      name: 'ShelfItemRegister',
+      component: ShelfItemRegister
     },
   ]
 })
