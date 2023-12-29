@@ -35,13 +35,15 @@
         <association property="merchant" column="merchant_id" javaType="Merchant">
             <id property="id" column="id"/>
             <result property="name" column="merchant_name"/>
+            <result property="address" column="merchant_address"/>
         </association>
     </resultMap>
     <select id="selectShelfItemInfoByKeyword" resultMap="ShelfItemResultMap">
         SELECT
         shelf_item.*,
         platform.name AS platform_name,
-        merchant.name AS merchant_name
+        merchant.name AS merchant_name,
+        merchant.address AS merchant_address
         FROM `shelf-item` AS shelf_item
         LEFT JOIN platform ON shelf_item.platform_id = platform.id
         LEFT JOIN merchant ON shelf_item.merchant_id = merchant.id
@@ -56,7 +58,8 @@
         SELECT
         shelf_item.*,
         platform.name AS platform_name,
-        merchant.name AS merchant_name
+        merchant.name AS merchant_name,
+        merchant.address AS merchant_address
         FROM `shelf-item` AS shelf_item
         LEFT JOIN platform ON shelf_item.platform_id = platform.id
         LEFT JOIN merchant ON shelf_item.merchant_id = merchant.id
@@ -64,4 +67,27 @@
             shelf_item.id = #{id}
         </where>
     </select>
+    <select id="selectShelfItemInfoByMerchantID" resultMap="ShelfItemResultMap">
+        SELECT
+        shelf_item.*,
+        platform.name AS platform_name,
+        merchant.name AS merchant_name,
+        merchant.address AS merchant_address
+        FROM `shelf-item` AS shelf_item
+        LEFT JOIN platform ON shelf_item.platform_id = platform.id
+        LEFT JOIN merchant ON shelf_item.merchant_id = merchant.id
+        <where>
+            shelf_item.merchant_id = #{id}
+        </where>
+    </select>
+
+    <select id="countShelfItems" resultType="java.lang.Integer">
+        SELECT COUNT(*) FROM `shelf-item`;
+    </select>
+
+    <insert id="insertShelfItem" parameterType="com.example.backend.entity.ShelfItem">
+        INSERT INTO `shelf-item` (item_id, merchant_id, platform_id, name, description, origin, production_date)
+        VALUES (#{item_id}, #{merchant_id}, #{platform_id}, #{name}, #{description}, #{origin}, #{production_date})
+        ON DUPLICATE KEY UPDATE id = id;
+    </insert>
 </mapper>

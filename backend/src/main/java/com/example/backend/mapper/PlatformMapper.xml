@@ -10,6 +10,9 @@
             id=#{id}
         </where>
     </select>
+    <select id="selectAllPlatforms" resultType="Platform">
+        select * from `platform`
+    </select>
     <select id="selectPlatformPageByName" resultType="Platform">
         select * from `platform`
         <where>

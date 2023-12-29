@@ -12,5 +12,6 @@ import java.util.List;
 public interface PlatformMapper extends BaseMapper<Platform> {
     IPage<Platform> selectPlatformPage(Page<Platform> page);
     List<Platform> selectPlatformPageByID(Integer id);
+    List<Platform> selectAllPlatforms();
     List<Platform> selectPlatformPageByName(String name);
 }

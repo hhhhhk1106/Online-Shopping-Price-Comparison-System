@@ -1,5 +1,7 @@
 package com.example.backend.controller;
 
+import com.example.backend.Result;
+import com.example.backend.entity.ShelfItem;
 import com.example.backend.service.ShelfItemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -21,5 +23,17 @@ public class ShelfItemController {
     @CrossOrigin
     public List<Object> getShelfItemsByID(@RequestParam(value = "id") Integer id) {
         return shelfItemService.searchByID(id);
+    }
+
+    @RequestMapping("/api/shelf_item_info_by_merchant_id")
+    @CrossOrigin
+    public List<Object> getShelfItemsByMerchantID(@RequestParam(value = "id") Integer id) {
+        return shelfItemService.searchByMerchantID(id);
+    }
+
+    @RequestMapping("/api/shelf_item_register")
+    @CrossOrigin
+    public Result addUser(@RequestBody ShelfItem shelfItem){
+        return shelfItemService.addShelfItem(shelfItem);
     }
 }

@@ -4,4 +4,7 @@
     <select id="selectItemPage" resultType="Item">
         select * from item
     </select>
+    <select id="selectAllItems" resultType="Item">
+        select * from item
+    </select>
 </mapper>
