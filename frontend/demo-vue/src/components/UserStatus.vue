@@ -9,6 +9,12 @@
       <router-link v-if="role_user" to="/">查看消息*</router-link>
       <router-link v-if="role_merchant" to="/merchant_info">商家信息</router-link>
       <router-link v-if="role_merchant" to="/shelf_item_register">发布商品</router-link>
+      <router-link v-if="role_admin" to="/">管理用户*</router-link>
+      <router-link v-if="role_admin" to="/">管理商家*</router-link>
+      <router-link v-if="role_admin" to="/">管理商品原型*</router-link>
+      <router-link v-if="role_admin" to="/shelf_item_admin">管理商品</router-link>
+      <router-link v-if="role_admin" to="/">管理平台*</router-link>
+
       <!-- <router-link v-if="role_merchant" to="/">修改商品*</router-link> -->
     </div>
     
@@ -31,6 +37,7 @@
         logInfo: null,
         role_user: false,
         role_merchant: false,
+        role_admin: false,
       };
     },
     created() {
@@ -44,12 +51,13 @@
         const userId = localStorage.getItem('id');
 
         if(role == 'user') {
-          this.role_user = true;
           this.role_merchant = false;
           if(userId == 1) {
             this.logInfo = '管理员';
+            this.role_admin = true;
           } else {
             this.logInfo = '用户 id:'+userId;
+            this.role_user = true;
           }
         } else if(role == 'merchant') {
           this.logInfo = '商家 id:'+userId;

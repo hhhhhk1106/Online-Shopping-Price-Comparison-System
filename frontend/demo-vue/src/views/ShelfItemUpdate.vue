@@ -2,6 +2,7 @@
 
 <template>
     <div>
+      <UserStatus></UserStatus>
       <h3>修改商品</h3>
       <p>商品ID: {{ item.id }}</p>
       <p>商品原型: {{ item.item.name }}</p>
@@ -92,9 +93,8 @@
         });
       },
       formatDate(dateString) {
-        const dateFormatter = new Intl.DateTimeFormat('en-US', {year: 'numeric',month: '2-digit',day: '2-digit'});
-        // const options = { year: 'numeric', month: 'long', day: 'numeric' };
-        const formattedDate = new Date(dateString).toLocaleDateString(undefined, dateFormatter);
+        const dateFormatter = new Intl.DateTimeFormat('zh-CN', {year: 'numeric',month: '2-digit',day: '2-digit'});
+        const formattedDate = dateFormatter.format(new Date(dateString));
         const formattedDateNew = formattedDate.replace('/', '-').replace('/', '-');
         return formattedDateNew;
       },

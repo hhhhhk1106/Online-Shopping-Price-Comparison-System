@@ -12,6 +12,7 @@ import Search from '@/views/Search.vue';
 import ProductDetail from '@/views/ProductDetail.vue';
 import ShelfItemRegister from '@/views/ShelfItemRegister.vue';
 import ShelfItemUpdate from '@/views/ShelfItemUpdate.vue';
+import ShelfItemAdmin from '@/views/ShelfItemAdmin.vue';
 
 Vue.use(Router)
 
@@ -71,6 +72,11 @@ export default new Router({
       path: '/shelf_item_update/:id',
       name: 'ShelfItemUpdate',
       component: ShelfItemUpdate
+    },
+    {
+      path: '/shelf_item_admin',
+      name: 'ShelfItemAdmin',
+      component: ShelfItemAdmin
     },
   ]
 })

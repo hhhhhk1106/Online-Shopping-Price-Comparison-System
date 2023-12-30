@@ -35,6 +35,7 @@ import UserStatus from '@/components/UserStatus.vue';
       return {
         productId: null,
         product: {
+          merchant_id: null,
           merchant:{}
         },
         role_merchant: false,
@@ -66,6 +67,9 @@ import UserStatus from '@/components/UserStatus.vue';
           const role = localStorage.getItem('role');
           const userId = localStorage.getItem('id');
           if(role == 'merchant' && userId == this.product.merchant_id) {
+            this.role_merchant = true;
+          } else if(role == 'user' && userId == 1) {
+            // 管理员
             this.role_merchant = true;
           }
 

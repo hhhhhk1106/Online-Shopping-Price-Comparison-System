@@ -2,6 +2,7 @@
 
 <template>
     <div>
+      <UserStatus></UserStatus>
       <h3>发布商品</h3>
       <label>商品原型：</label>
       <select v-model="item.item_id" required>
@@ -18,6 +19,8 @@
           {{ platform.name }}
         </option>
       </select><br /><br />
+      <label v-if="role_admin">商家：</label>
+      <input v-if="role_admin" v-model="item.merchant_id" type="number" placeholder="请输入商家id" /><br v-if="role_admin"/><br v-if="role_admin"/>
       <label>名称：</label>
       <input v-model="item.name" type="text" placeholder="请输入名称" /><br /><br />
       <label>描述：</label>
@@ -49,13 +52,22 @@
           origin: '',
           production_date: '',
           price: null,
-        }
+        },
+        role_admin: false,
+
       };
     },
     mounted() {
       // 在组件挂载时从后端获取平台数据
       this.fetchItems();
       this.fetchPlatforms();
+    },
+    created() {
+      const role = localStorage.getItem('role');
+      const userId = localStorage.getItem('id');
+      if(role == 'user' && userId == 1) {
+        this.role_admin = true;
+      }
     },
     methods: {
       fetchItems() {
@@ -79,8 +91,10 @@
           });
       },
       registerItem() {
-        const userId = localStorage.getItem('id');
-        this.item.merchant_id = userId;
+        if(this.item.merchant_id == null) {
+          const userId = localStorage.getItem('id');
+          this.item.merchant_id = userId;
+        }
 
         console.log(this.item);
 
@@ -96,7 +110,11 @@
           .then(response => {
             if(response.data.code==200) {
               console.log('注册成功', response.data);
-              this.$router.replace({path: '/merchant_info'})
+              if(role_admin) {
+                this.$router.replace({path: '/shelf_item_admin'})
+              } else {
+                this.$router.replace({path: '/merchant_info'})
+              }
             } else {
               console.log(response.data.message);
               alert(response.data.message);
