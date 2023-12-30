@@ -11,4 +11,6 @@ public interface ShelfItemService {
     List<Object> searchByMerchantID(Integer id);
 
     Result addShelfItem(ShelfItem shelfItem);
+
+    Result updateShelfItem(ShelfItem shelfItem);
 }

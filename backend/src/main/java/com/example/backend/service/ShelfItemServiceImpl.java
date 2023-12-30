@@ -41,4 +41,14 @@ public class ShelfItemServiceImpl implements ShelfItemService{
             return new Result(400,"已经在该平台发布该商品",shelfItem);
         }
     }
+
+    @Override
+    public Result updateShelfItem(ShelfItem shelfItem) {
+        int line = shelfItemMapper.updateById(shelfItem);
+        if(line > 0) {
+            return new Result(200, "", shelfItem);
+        } else {
+            return new Result(400,"更新失败",shelfItem);
+        }
+    }
 }

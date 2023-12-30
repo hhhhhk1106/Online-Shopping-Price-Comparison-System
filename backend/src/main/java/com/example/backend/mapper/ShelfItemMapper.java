@@ -16,6 +16,6 @@ public interface ShelfItemMapper extends BaseMapper<ShelfItem> {
     List<Object> selectShelfItemInfoByKeyword(String keyword);
     List<Object> selectShelfItemInfoByID(Integer id);
     List<Object> selectShelfItemInfoByMerchantID(Integer id);
-    int insertShelfItem(ShelfItem shelfItem);
+    void insertShelfItem(ShelfItem shelfItem);
     int countShelfItems();
 }

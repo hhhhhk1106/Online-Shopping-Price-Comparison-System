@@ -33,7 +33,13 @@ public class ShelfItemController {
 
     @RequestMapping("/api/shelf_item_register")
     @CrossOrigin
-    public Result addUser(@RequestBody ShelfItem shelfItem){
+    public Result addShelfItem(@RequestBody ShelfItem shelfItem){
         return shelfItemService.addShelfItem(shelfItem);
+    }
+    
+    @RequestMapping("/api/shelf_item_update")
+    @CrossOrigin
+    public Result updateShelfItem(@RequestBody ShelfItem shelfItem){
+        return shelfItemService.updateShelfItem(shelfItem);
     }
 }

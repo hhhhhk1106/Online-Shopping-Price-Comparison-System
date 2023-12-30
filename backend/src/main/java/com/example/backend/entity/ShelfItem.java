@@ -21,6 +21,7 @@ public class ShelfItem {
 
     private Platform platform;
     private Merchant merchant;
+    private Item item;
 
     public ShelfItem(Integer item_id, Integer merchant_id, Integer platform_id, String name, String description, String origin, Date production_date) {
         this.item_id = item_id;
