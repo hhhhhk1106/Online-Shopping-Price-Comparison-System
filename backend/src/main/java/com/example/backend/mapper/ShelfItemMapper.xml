@@ -43,6 +43,20 @@
         <result property="category" column="item_category"/>
     </association>
     </resultMap>
+    <select id="selectShelfItemsAll" resultMap="ShelfItemResultMap">
+        SELECT
+        shelf_item.*,
+        item.name AS item_name,
+        item.category AS item_category,
+        platform.name AS platform_name,
+        merchant.name AS merchant_name,
+        merchant.address AS merchant_address
+        FROM `shelf-item` AS shelf_item
+        LEFT JOIN platform ON shelf_item.platform_id = platform.id
+        LEFT JOIN merchant ON shelf_item.merchant_id = merchant.id
+        LEFT JOIN item ON shelf_item.item_id = item.id
+    </select>
+
     <select id="selectShelfItemInfoByKeyword" resultMap="ShelfItemResultMap">
         SELECT
         shelf_item.*,

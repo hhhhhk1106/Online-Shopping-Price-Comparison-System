@@ -28,6 +28,11 @@ public class ShelfItemServiceImpl implements ShelfItemService{
     }
 
     @Override
+    public List<Object> getAllShelfItems() {
+        return shelfItemMapper.selectShelfItemsAll();
+    }
+
+    @Override
     public Result addShelfItem(ShelfItem shelfItem) {
         int num1 = shelfItemMapper.countShelfItems();
         shelfItemMapper.insertShelfItem(shelfItem);

@@ -11,6 +11,7 @@ import java.util.List;
 @Mapper
 public interface ShelfItemMapper extends BaseMapper<ShelfItem> {
     IPage<ShelfItem> selectShelfItemPage(Page<ShelfItem> page);
+    List<Object> selectShelfItemsAll();
     List<ShelfItem> selectShelfItemPageByKeyword(String keyword);
     List<ShelfItem> selectShelfItemPageByMerchantID(Integer merchant_id);
     List<Object> selectShelfItemInfoByKeyword(String keyword);
@@ -18,4 +19,5 @@ public interface ShelfItemMapper extends BaseMapper<ShelfItem> {
     List<Object> selectShelfItemInfoByMerchantID(Integer id);
     void insertShelfItem(ShelfItem shelfItem);
     int countShelfItems();
+
 }

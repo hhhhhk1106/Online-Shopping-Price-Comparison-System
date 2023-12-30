@@ -31,6 +31,12 @@ public class ShelfItemController {
         return shelfItemService.searchByMerchantID(id);
     }
 
+    @RequestMapping("/api/shelf_item_all")
+    @CrossOrigin
+    public List<Object> getShelfItemsAll() {
+        return shelfItemService.getAllShelfItems();
+    }
+
     @RequestMapping("/api/shelf_item_register")
     @CrossOrigin
     public Result addShelfItem(@RequestBody ShelfItem shelfItem){
