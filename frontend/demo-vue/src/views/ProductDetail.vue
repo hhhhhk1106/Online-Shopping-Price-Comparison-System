@@ -6,11 +6,12 @@
         <h2>商品详情页</h2>
         <p>商品名称: {{ product.name }}</p>
         <p>商品ID: {{ productId }}</p>
-        <p>描述: {{ product.description }}</p>
-        <p>产地: {{ product.origin }}</p>
+        <p>描述: {{ product.description? product.description : '无' }}</p>
+        <p>产地: {{ product.origin? product.origin : '无' }}</p>
         <p>生产日期: {{ formatDate(product.production_date) }}</p>
-        <p>商家: {{ product.merchant.name }}</p>
+        <p>商家: {{ product.merchant.name? product.merchant.name : '无' }}</p>
         <p>平台: {{ product.platform ? product.platform.name : '无' }}</p>
+        <button v-if="role_merchant" @click="shelfItemUpdate">修改商品</button>
         <div>
             <h3>历史价格</h3>
             <ul>
@@ -18,6 +19,7 @@
                 {{ formatDate(price.date) }} - ￥{{ price.amount }}
                 </li>
             </ul>
+            <button v-if="role_merchant" @click="priceUpdate">修改价格*</button>
         </div>
     </div>
   </template>
@@ -32,8 +34,15 @@ import UserStatus from '@/components/UserStatus.vue';
     data() {
       return {
         productId: null,
-        product: null,
+        product: {
+          merchant:{}
+        },
+        role_merchant: false,
+
       };
+    },
+    mounted() {
+      // this.checkMerchant();
     },
     created() {
       // 在这里从路由参数中获取商品ID
@@ -53,16 +62,31 @@ import UserStatus from '@/components/UserStatus.vue';
                 { id: 3, date: '2023-03-01', amount: 80 },
             ],
           console.log(response.data)
+
+          const role = localStorage.getItem('role');
+          const userId = localStorage.getItem('id');
+          if(role == 'merchant' && userId == this.product.merchant_id) {
+            this.role_merchant = true;
+          }
+
         })
         .catch(error => {
           console.error('Error fetching shelf items:', error);
         });
     },
     methods: {
-        formatDate(dateString) {
+
+      formatDate(dateString) {
         // 格式化日期方法，可以根据实际需求进行调整
         const options = { year: 'numeric', month: 'long', day: 'numeric' };
         return new Date(dateString).toLocaleDateString(undefined, options);
+      },
+      shelfItemUpdate() {
+        // this.$router.push('/shelf_item_update');
+        this.$router.push({ name: 'ShelfItemUpdate', params: { id: this.productId } });
+      },
+      priceUpdate() {
+        this.$router.push('/');
       }
     }
   };
