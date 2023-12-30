@@ -8,6 +8,7 @@ import MerchantInfo from '@/views/MerchantInfo.vue'
 import UserRegister from '@/views/UserRegister.vue'
 import MerchantRegister from '@/views/MerchantRegister.vue'
 import Home from '@/views/Home.vue';
+import Search from '@/views/Search.vue';
 import ProductDetail from '@/views/ProductDetail.vue';
 import ShelfItemRegister from '@/views/ShelfItemRegister.vue';
 import ShelfItemUpdate from '@/views/ShelfItemUpdate.vue';
@@ -25,6 +26,11 @@ export default new Router({
       path: '/',
       name: 'home',
       component: Home
+    },
+    {
+      path: '/search/:keyword',
+      name: 'Search',
+      component: Search
     },
     {
       path: '/login',

@@ -1,8 +1,8 @@
-<!-- Home.vue -->
+<!-- Search.vue -->
 
 <template>
     <div>
-        <UserStatus></UserStatus>
+      <UserStatus></UserStatus>
       <h1>商品搜索</h1>
       <input v-model="searchKeyword" placeholder="输入关键词" />
       <button @click="searchProducts">搜索</button>
@@ -24,9 +24,27 @@
         productList: [],
       };
     },
+    created() {
+      console.log(this.$route.params)
+      this.searchKeyword = this.$route.params.keyword;
+      // console.log(this.$route.params)
+      // this.searchProducts();
+      this.$axios
+        ({
+          method: "post",
+          url:'/shelf_item_info_by_keyword', 
+          params:{keyword:this.searchKeyword}
+        })
+        .then(response => {
+          this.productList = response.data;
+          console.log(response.data)
+        })
+        .catch(error => {
+          console.error('Error fetching shelf items:', error);
+        });
+    },
     methods: {
       searchProducts() {
-        // TODO:
         this.$axios
         ({
           method: "post",
@@ -41,7 +59,6 @@
           console.error('Error fetching shelf items:', error);
         });
         // this.productList = this.fetchProductList(this.searchKeyword);
-        this.$router.replace({ name: 'Search', params: { keyword:this.searchKeyword } });
       },
       goToProductDetail(productId) {
         // 跳转到商品详情页
