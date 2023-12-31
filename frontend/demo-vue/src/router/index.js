@@ -10,6 +10,8 @@ import UserAdmin from '@/views/UserAdmin.vue'
 // 商家
 import MerchantInfo from '@/views/MerchantInfo.vue'
 import MerchantRegister from '@/views/MerchantRegister.vue'
+import MerchantUpdate from '@/views/MerchantUpdate.vue';
+import MerchantAdmin from '@/views/MerchantAdmin.vue'
 // 主页
 import Home from '@/views/Home.vue';
 import Search from '@/views/Search.vue';
@@ -68,11 +70,23 @@ export default new Router({
       name: 'UserAdmin',
       component: UserAdmin
     },
+
     {
       path: '/merchant_register',
       name: 'MerchantRegister',
       component: MerchantRegister
     },
+    {
+      path: '/merchant_update/:id',
+      name: 'MerchantUpdate',
+      component: MerchantUpdate
+    },
+    {
+      path: '/merchant_admin',
+      name: 'MerchantAdmin',
+      component: MerchantAdmin
+    },
+
     {
       path: '/product/:id',
       name: 'productDetail',

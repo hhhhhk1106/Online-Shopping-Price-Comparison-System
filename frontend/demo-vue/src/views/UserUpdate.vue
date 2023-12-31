@@ -1,13 +1,10 @@
-<!-- ShelfItemUpdate.vue -->
+<!-- UserUpdate.vue -->
 
 <template>
     <div>
       <UserStatus></UserStatus>
       <h3>修改用户</h3>
-      <p>用户ID: {{ user.id }}</p>
-      <!-- <p>商品原型: {{ item.item.name }}</p> -->
-      <!-- <p>平台: {{ item.platform.name }}</p> -->
-  
+      <p>用户ID: {{ user.id }}</p>  
       <label>姓名：</label>
       <input v-model="user.name" type="text" placeholder="请输入姓名" /><br /><br />
   

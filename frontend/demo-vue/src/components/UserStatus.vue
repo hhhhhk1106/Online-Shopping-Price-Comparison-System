@@ -10,7 +10,7 @@
       <router-link v-if="role_merchant" to="/merchant_info">商家信息</router-link>
       <router-link v-if="role_merchant" to="/shelf_item_register">发布商品</router-link>
       <router-link v-if="role_admin" to="/user_admin">管理用户</router-link>
-      <router-link v-if="role_admin" to="/">管理商家*</router-link>
+      <router-link v-if="role_admin" to="/merchant_admin">管理商家</router-link>
       <router-link v-if="role_admin" to="/">管理商品原型*</router-link>
       <router-link v-if="role_admin" to="/shelf_item_admin">管理商品</router-link>
       <router-link v-if="role_admin" to="/">管理平台*</router-link>

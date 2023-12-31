@@ -2,6 +2,7 @@
 
 <template>
     <div>
+      <UserStatus></UserStatus>
       <h3>商家注册</h3>
       <label>名称：</label>
       <input v-model="merchant.name" type="text" placeholder="请输入名称" /><br /><br />
@@ -34,6 +35,15 @@
           .then(response => {
             // 处理注册成功的逻辑
             console.log('注册成功', response.data);
+
+            const role = localStorage.getItem('role');
+            const userId = localStorage.getItem('id');
+            if(role == 'user' && userId == 1) {
+              // 管理员
+              this.$router.replace({path: '/merchant_admin'})
+              return;
+            }
+
             localStorage.setItem("role", 'merchant');
             localStorage.setItem("id", response.data.data.id);
             this.$router.replace({path: '/'})
