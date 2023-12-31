@@ -1,7 +1,6 @@
 package com.example.backend.controller;
 
 import com.example.backend.Result;
-import com.example.backend.entity.Merchant;
 import com.example.backend.entity.Platform;
 import com.example.backend.service.PlatformService;
 import org.springframework.beans.factory.annotation.Autowired;
