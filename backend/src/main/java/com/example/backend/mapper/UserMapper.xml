@@ -4,4 +4,7 @@
     <select id="selectUserPage" resultType="User">
         select * from user
     </select>
+    <select id="selectUsersAll" resultType="User">
+        select * from user
+    </select>
 </mapper>
