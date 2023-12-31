@@ -24,6 +24,10 @@ import ShelfItemAdmin from '@/views/ShelfItemAdmin.vue';
 import PlatformRegister from '@/views/PlatformRegister.vue'
 import PlatformUpdate from '@/views/PlatformUpdate.vue';
 import PlatformAdmin from '@/views/PlatformAdmin.vue'
+// 商品原型
+import ItemRegister from '@/views/ItemRegister.vue'
+import ItemUpdate from '@/views/ItemUpdate.vue';
+import ItemAdmin from '@/views/ItemAdmin.vue'
 
 Vue.use(Router)
 
@@ -126,6 +130,22 @@ export default new Router({
       path: '/platform_admin',
       name: 'PlatformAdmin',
       component: PlatformAdmin
+    },
+
+    {
+      path: '/item_register',
+      name: 'ItemRegister',
+      component: ItemRegister
+    },
+    {
+      path: '/item_update/:id',
+      name: 'ItemUpdate',
+      component: ItemUpdate
+    },
+    {
+      path: '/item_admin',
+      name: 'ItemAdmin',
+      component: ItemAdmin
     },
   ]
 })

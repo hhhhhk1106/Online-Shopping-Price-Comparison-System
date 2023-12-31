@@ -1,16 +1,16 @@
-<!-- MerchantList.vue -->
+<!-- ItemList.vue -->
 
 <template>
     <div>
-      <h2>商家列表</h2>
+      <h2>原型列表</h2>
       <ul class="product-list">
         <li class="product-item" v-for="user in users" :key="user.id">
           <div>
           <strong>ID: {{ user.id }}</strong>
           <p>Name: {{ user.name }}</p>
-          <p>Address: {{ user.address }}</p>
-          <button @click="updateUser(user.id)">修改</button>
-          <button @click="deleteUser(user.id)">删除</button>
+          <p>Category: {{ user.category }}</p>
+          <button @click="updateItem(user.id)">修改</button>
+          <button @click="deleteItem(user.id)">删除</button>
         </div>
         </li>
       </ul>
@@ -26,20 +26,20 @@
       }
     },
     methods: {
-      updateUser(userId) {
+      updateItem(userId) {
         console.log("update:", userId);
-        this.$router.push({ name: 'MerchantUpdate', params: { id: userId } });
+        this.$router.push({ name: 'ItemUpdate', params: { id: userId } });
       },
-      deleteUser(userId) {
+      deleteItem(userId) {
         console.log("delete:", userId);
-        const userConfirmed = window.confirm('确定删除该商家？');
+        const userConfirmed = window.confirm('确定删除该类商品？');
         if (userConfirmed) {
           // this.deleteItem();
           console.log('用户确认');
           this.$axios
           ({
             method: "post",
-            url:'/merchant_delete_by_id', 
+            url:'/item_delete_by_id', 
             params:{id:userId}
           })
           .then(response => {
@@ -50,7 +50,7 @@
             }
           })
           .catch(error => {
-            console.error('Error fetching merchants:', error);
+            console.error('Error fetching items:', error);
           });
         } else {
           // 取消
