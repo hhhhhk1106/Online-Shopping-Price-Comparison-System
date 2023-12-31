@@ -52,9 +52,9 @@
         merchant.name AS merchant_name,
         merchant.address AS merchant_address
         FROM `shelf-item` AS shelf_item
-        LEFT JOIN platform ON shelf_item.platform_id = platform.id
-        LEFT JOIN merchant ON shelf_item.merchant_id = merchant.id
-        LEFT JOIN item ON shelf_item.item_id = item.id
+        INNER JOIN platform ON shelf_item.platform_id = platform.id
+        INNER JOIN merchant ON shelf_item.merchant_id = merchant.id
+        INNER JOIN item ON shelf_item.item_id = item.id
     </select>
 
     <select id="selectShelfItemInfoByKeyword" resultMap="ShelfItemResultMap">
@@ -66,9 +66,9 @@
         merchant.name AS merchant_name,
         merchant.address AS merchant_address
         FROM `shelf-item` AS shelf_item
-        LEFT JOIN platform ON shelf_item.platform_id = platform.id
-        LEFT JOIN merchant ON shelf_item.merchant_id = merchant.id
-        LEFT JOIN item ON shelf_item.item_id = item.id
+        INNER JOIN platform ON shelf_item.platform_id = platform.id
+        INNER JOIN merchant ON shelf_item.merchant_id = merchant.id
+        INNER JOIN item ON shelf_item.item_id = item.id
         <where>
             <if test="keyword != null and keyword != ''">
                 AND shelf_item.`name` LIKE CONCAT('%', #{keyword}, '%')
@@ -85,9 +85,9 @@
         merchant.name AS merchant_name,
         merchant.address AS merchant_address
         FROM `shelf-item` AS shelf_item
-        LEFT JOIN platform ON shelf_item.platform_id = platform.id
-        LEFT JOIN merchant ON shelf_item.merchant_id = merchant.id
-        LEFT JOIN item ON shelf_item.item_id = item.id
+        INNER JOIN platform ON shelf_item.platform_id = platform.id
+        INNER JOIN merchant ON shelf_item.merchant_id = merchant.id
+        INNER JOIN item ON shelf_item.item_id = item.id
         <where>
             shelf_item.id = #{id}
         </where>
@@ -101,9 +101,9 @@
         merchant.name AS merchant_name,
         merchant.address AS merchant_address
         FROM `shelf-item` AS shelf_item
-        LEFT JOIN platform ON shelf_item.platform_id = platform.id
-        LEFT JOIN merchant ON shelf_item.merchant_id = merchant.id
-        LEFT JOIN item ON shelf_item.item_id = item.id
+        INNER JOIN platform ON shelf_item.platform_id = platform.id
+        INNER JOIN merchant ON shelf_item.merchant_id = merchant.id
+        INNER JOIN item ON shelf_item.item_id = item.id
         <where>
             shelf_item.merchant_id = #{id}
         </where>
