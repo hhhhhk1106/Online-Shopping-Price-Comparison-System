@@ -20,6 +20,10 @@ import ProductDetail from '@/views/ProductDetail.vue';
 import ShelfItemRegister from '@/views/ShelfItemRegister.vue';
 import ShelfItemUpdate from '@/views/ShelfItemUpdate.vue';
 import ShelfItemAdmin from '@/views/ShelfItemAdmin.vue';
+// 平台
+import PlatformRegister from '@/views/PlatformRegister.vue'
+import PlatformUpdate from '@/views/PlatformUpdate.vue';
+import PlatformAdmin from '@/views/PlatformAdmin.vue'
 
 Vue.use(Router)
 
@@ -51,11 +55,6 @@ export default new Router({
       component: UserInfo
     },
     {
-      path: '/merchant_info',
-      name: 'MerchantInfo',
-      component: MerchantInfo
-    },
-    {
       path: '/user_register',
       name: 'UserRegister',
       component: UserRegister
@@ -71,6 +70,11 @@ export default new Router({
       component: UserAdmin
     },
 
+    {
+      path: '/merchant_info',
+      name: 'MerchantInfo',
+      component: MerchantInfo
+    },
     {
       path: '/merchant_register',
       name: 'MerchantRegister',
@@ -106,6 +110,22 @@ export default new Router({
       path: '/shelf_item_admin',
       name: 'ShelfItemAdmin',
       component: ShelfItemAdmin
+    },
+
+    {
+      path: '/platform_register',
+      name: 'PlatformRegister',
+      component: PlatformRegister
+    },
+    {
+      path: '/platform_update/:id',
+      name: 'PlatformUpdate',
+      component: PlatformUpdate
+    },
+    {
+      path: '/platform_admin',
+      name: 'PlatformAdmin',
+      component: PlatformAdmin
     },
   ]
 })
