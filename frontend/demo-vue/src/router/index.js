@@ -1,14 +1,19 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import HelloWorld from '@/components/HelloWorld'
-
+// 用户
 import login from '@/views/login.vue'
 import UserInfo from '@/views/UserInfo.vue'
-import MerchantInfo from '@/views/MerchantInfo.vue'
 import UserRegister from '@/views/UserRegister.vue'
+import UserUpdate from '@/views/UserUpdate.vue';
+import UserAdmin from '@/views/UserAdmin.vue'
+// 商家
+import MerchantInfo from '@/views/MerchantInfo.vue'
 import MerchantRegister from '@/views/MerchantRegister.vue'
+// 主页
 import Home from '@/views/Home.vue';
 import Search from '@/views/Search.vue';
+// 商品
 import ProductDetail from '@/views/ProductDetail.vue';
 import ShelfItemRegister from '@/views/ShelfItemRegister.vue';
 import ShelfItemUpdate from '@/views/ShelfItemUpdate.vue';
@@ -52,6 +57,16 @@ export default new Router({
       path: '/user_register',
       name: 'UserRegister',
       component: UserRegister
+    },
+    {
+      path: '/user_update/:id',
+      name: 'UserUpdate',
+      component: UserUpdate
+    },
+    {
+      path: '/user_admin',
+      name: 'UserAdmin',
+      component: UserAdmin
     },
     {
       path: '/merchant_register',
