@@ -31,7 +31,7 @@
       },
       deletePlatform(userId) {
         console.log("delete:", userId);
-        const userConfirmed = window.confirm('确定删除该平台？');
+        const userConfirmed = window.confirm('确定删除该平台及相关商品？');
         if (userConfirmed) {
           // this.deleteItem();
           console.log('用户确认');

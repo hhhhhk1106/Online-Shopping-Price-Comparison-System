@@ -110,7 +110,7 @@
           .then(response => {
             if(response.data.code==200) {
               console.log('注册成功', response.data);
-              if(role_admin) {
+              if(this.role_admin) {
                 this.$router.replace({path: '/shelf_item_admin'})
               } else {
                 this.$router.replace({path: '/merchant_info'})

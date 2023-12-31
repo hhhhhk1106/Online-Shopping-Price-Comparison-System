@@ -32,7 +32,7 @@
       },
       deleteItem(userId) {
         console.log("delete:", userId);
-        const userConfirmed = window.confirm('确定删除该类商品？');
+        const userConfirmed = window.confirm('确定删除所有该类商品？');
         if (userConfirmed) {
           // this.deleteItem();
           console.log('用户确认');
