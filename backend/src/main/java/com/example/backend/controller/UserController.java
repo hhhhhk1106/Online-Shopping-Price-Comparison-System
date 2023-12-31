@@ -1,7 +1,6 @@
 package com.example.backend.controller;
 
 import com.example.backend.Result;
-import com.example.backend.entity.ShelfItem;
 import com.example.backend.entity.User;
 import com.example.backend.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;

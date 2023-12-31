@@ -4,4 +4,7 @@
     <select id="selectMerchantPage" resultType="Merchant">
         select * from merchant
     </select>
+    <select id="selectMerchantsAll" resultType="Merchant">
+        select * from merchant
+    </select>
 </mapper>
