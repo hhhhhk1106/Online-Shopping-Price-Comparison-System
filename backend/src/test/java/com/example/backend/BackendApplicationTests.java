@@ -1,18 +1,17 @@
 package com.example.backend;
 
-import com.example.backend.entity.Merchant;
-import com.example.backend.entity.ShelfItem;
-import com.example.backend.entity.User;
-import com.example.backend.mapper.MerchantMapper;
-import com.example.backend.mapper.ShelfItemMapper;
-import com.example.backend.mapper.UserMapper;
+import com.example.backend.entity.*;
+import com.example.backend.mapper.*;
+import com.example.backend.service.PriceService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -27,6 +26,12 @@ class BackendApplicationTests {
     MerchantMapper merchantMapper;
     @Autowired
     ShelfItemMapper shelfItemMapper;
+    @Autowired
+    PriceMapper priceMapper;
+    @Autowired
+    PriceService priceService;
+    @Autowired
+    StarMapper starMapper;
 
     @Test
     @DisplayName("插入user")
@@ -38,54 +43,47 @@ class BackendApplicationTests {
     }
 
     @Test
-    @DisplayName("打印user表条目数")
-    void showUserSize() {
-        List<User> userList= userMapper.selectList(null);
-        System.out.println(userList.size());
+    @DisplayName("调整价格")
+    void insertPrice(){
+        Price price1=new Price(6, (float) 9.66, new Date(2022-1900,0,1));
+        Price price2=new Price(6, (float) 10.66, new Date(2023-1900,0,1));
+        Price price3=new Price(6, (float) 11.66, new Date(2023-1900,1,1));
+        Price price4=new Price(6, (float) 12.66, new Date(2023-1900,2,1));
+        Price price5=new Price(6, (float) 8.66, new Date(2024-1900,0,1));
+        Integer i=priceMapper.insert(price1);
+        i=priceMapper.insert(price2);
+        i=priceMapper.insert(price3);
+        i=priceMapper.insert(price4);
+        i=priceMapper.insert(price5);
     }
 
     @Test
-    @DisplayName("根据id查找user")
-    public void testSelectUserById(){
-        User user=userMapper.selectById(1);
-        String name = user.getName();
-        System.out.println(name);
-        assertEquals("admin", name);
-    }
+    @DisplayName("查询一段时间的价格")
+    void searchPrice(){
+        Date startTime=new Date(2023-1900,0,1);
+        Date endTime=new Date(2024-1900,0,1);
+        List<Object> priceChanges=priceService.PriceChanges(6,startTime,endTime);
+        //List<Map<Float,Date>> change=priceService.PriceChanges(6,startTime,endTime,true);
+        Float minPrice = Float.MAX_VALUE;
+        for (Object obj : priceChanges) {
+            if (obj instanceof Price) {
+                Price priceObject = (Price) obj;
+                Float price = priceObject.getPrice();
+                System.out.println(price);
+                System.out.println(priceObject.getTimestamp());
 
-    @Test
-    @DisplayName("插入上架商品")
-    void insertShelfItem() {
-        ShelfItem shelfItem = new ShelfItem(1,1,1,"item-test",null,null,null);
-        Integer i = shelfItemMapper.insert(shelfItem);
-        System.out.println(i);
-    }
-
-    @Test
-    @DisplayName("根据id查找具体商品信息")
-    public void testSelectShelfItemById(){
-        // TODO: 多表查询？
-        ShelfItem shelfItem = shelfItemMapper.selectById(1);
-        String name = shelfItem.getName();
-        Integer merchant_id = shelfItem.getMerchant_id();
-        Merchant merchant = merchantMapper.selectById(merchant_id);
-        System.out.println(name +" "+ merchant.getName());
-    }
-    @Test
-    @DisplayName("根据关键词查找商品列表")
-    public void testSelectShelfItemsByKeyword(){
-        List<ShelfItem> shelfItems = shelfItemMapper.selectShelfItemPageByKeyword("test");
-        for(ShelfItem s : shelfItems) {
-            System.out.println(s.getId() +" "+ s.getName());
+                if (price != null && price < minPrice) {
+                    minPrice = price;
+                }
+            }
         }
+        System.out.println(minPrice);
     }
 
     @Test
-    @DisplayName("根据商户id查找拥有的所有商品列表")
-    public void testSelectShelfItemsByMerchant(){
-        List<ShelfItem> shelfItems = shelfItemMapper.selectShelfItemPageByMerchantID(1);
-        for(ShelfItem s : shelfItems) {
-            System.out.println(s.getId() +" "+ s.getName());
-        }
+    @DisplayName("收藏商品")
+    void insertStar(){
+        Star star=new Star(3,2,6,(float)10);
+        Integer i=starMapper.insert(star);
     }
 }

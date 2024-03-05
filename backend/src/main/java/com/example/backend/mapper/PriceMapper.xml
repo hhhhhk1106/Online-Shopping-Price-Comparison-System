@@ -2,21 +2,17 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.backend.mapper.PriceMapper">
     <select id="selectPricePage" resultType="Price">
-        select * from `price`
+        select * from price
     </select>
     <select id="selectPricePageByID" resultType="Price">
-        select * from `price`
+        select * from price
         <where>
             id=#{id}
         </where>
     </select>
-    <sql id="orderByClause">
-        <if test="orderBy != null">
-            ORDER BY ${orderBy}
-        </if>
-    </sql>
+
     <select id="selectPricePageByShelfItemID" resultType="Price">
-        select * from `price`
+        select * from price
         <where>
             shelfItem_id=#{shelfItem_id}
         </where>
@@ -24,4 +20,27 @@
             <property name="orderBy" value="timestamp ASC"/>
         </include>
     </select>
+
+    <resultMap id="priceMap" type="Price">
+        <id property="id" column="id"/>
+        <result property="price" column="price"/>
+        <result property="timestamp" column="timestamp"/>
+    </resultMap>
+
+    <sql id="orderByClause">
+        <if test="orderBy != null">
+            ORDER BY ${orderBy}
+        </if>
+    </sql>
+
+    <select id="findPriceChanges" resultMap="priceMap">
+        SELECT id, price, timestamp FROM price
+        <where>
+            shelfItem_id=#{shelfItem_id} AND timestamp &gt;= #{startTime} AND timestamp &lt;= #{endTime}
+        </where>
+        ORDER BY timestamp ASC
+    </select>
+
+
+
 </mapper>

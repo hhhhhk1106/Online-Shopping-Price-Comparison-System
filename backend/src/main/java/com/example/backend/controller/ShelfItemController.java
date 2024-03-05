@@ -42,7 +42,7 @@ public class ShelfItemController {
     public Result addShelfItem(@RequestBody ShelfItem shelfItem){
         return shelfItemService.addShelfItem(shelfItem);
     }
-    
+
     @RequestMapping("/api/shelf_item_update")
     @CrossOrigin
     public Result updateShelfItem(@RequestBody ShelfItem shelfItem){
